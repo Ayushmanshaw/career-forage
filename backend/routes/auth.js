@@ -78,9 +78,12 @@ router.get('/github/callback', async (req, res) => {
       }
     );
   } catch (err) {
-    console.error('❌ Error in GitHub callback:', err.message || err);
-    return res.status(500).json({ error: 'OAuth or portfolio generation failed' });
-  }
+  console.error('❌ Full error:', err); // full stack trace in logs
+  return res.status(500).json({ 
+    error: 'OAuth or portfolio generation failed', 
+    details: err.message || err.toString() 
+  });
+}
 });
 
 export default router;
