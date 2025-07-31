@@ -82,8 +82,8 @@ router.post('/generate', async (req, res) => {
     const remote = `https://oauth2:${token}@github.com/${username}/${repoName}.git`;
 
     await git.init();
-    await git.addConfig('user.name', 'Career Forage Bot'); // ✅ Git identity fix
-    await git.addConfig('user.email', 'noreply@careerforage.app'); // ✅ Git identity fix
+    await git.addConfig('user.name', 'Ayushmanshaw'); // ✅ Git identity fix
+    await git.addConfig('user.email', 'ayushmanshaw6471@gmail.com'); // ✅ Git identity fix
     await git.addRemote('origin', remote);
     await git.add('.');
     await git.commit('Initial commit');
