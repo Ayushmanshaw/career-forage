@@ -27,6 +27,10 @@ app.use("/api/ai", resumeParserRoute); // GPT parser route
 
 app.use('/api', authRoutes);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fb0897d7b5ee1a1a7f4de8572e2262648d682ce7
 app.get("/", (req, res) => {
   res.send("👋 Hello from the Resume Builder Backend!");
 });
