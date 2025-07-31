@@ -18,7 +18,7 @@ const Dashboard = () => {
         const token = await getToken();
 
         const response = await fetch(
-          `http://localhost:5000/api/resumes?userId=${user.id}`,
+          `https://career-forage.onrender.com/api/resumes?userId=${user.id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ const Dashboard = () => {
       const token = await getToken();
 
       const response = await fetch(
-        `http://localhost:5000/api/resumes/${resumeId}`,
+        `https://career-forage.onrender.com/api/resumes/${resumeId}`,
         {
           method: "DELETE",
           headers: {

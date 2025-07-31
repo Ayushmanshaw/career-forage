@@ -27,6 +27,10 @@ app.use("/api/ai", resumeParserRoute); // GPT parser route
 
 app.use('/api', authRoutes);
 
+app.get("/", (req, res) => {
+  res.send("👋 Hello from the Resume Builder Backend!");
+});
+
 // DB Connection + Start Server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
