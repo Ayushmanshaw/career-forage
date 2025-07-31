@@ -10,7 +10,7 @@ import ResumeLandingPage from './pages/resume/ResumeLandingPage.jsx';
 import ResumeTemplates from './pages/resume/ResumeTemplate.jsx';
 import ResumeBuilderForm from './pages/resume/ResumeForm.jsx';
 import ResumePreview from './pages/resume/ResumePreview.jsx';
-import Dashboard from './pages/Dashboard/Dashboard.jsx';
+import Dashboard from './pages/dashboard/Dashboard.jsx';
 import FormPage from './pages/portfolio/FormPage.jsx';
 import PortfolioPage from './pages/portfolio/PortfolioPage.jsx';
 
