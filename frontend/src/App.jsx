@@ -12,6 +12,7 @@ import ResumeBuilderForm from './pages/resume/ResumeForm.jsx';
 import ResumePreview from './pages/resume/ResumePreview.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import FormPage from './pages/portfolio/FormPage.jsx';
+import PortfolioPage from './pages/portfolio/PortfolioPage.jsx';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/resume/form" element={<ResumeBuilderForm />} />
           <Route path="/resume/preview" element={<ResumePreview />} />
           <Route path="/form" element={<FormPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} /> 
         </Route>
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>

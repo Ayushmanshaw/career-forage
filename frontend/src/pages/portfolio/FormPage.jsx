@@ -1,16 +1,21 @@
-// 📁 /pages/portfolio/PortfolioBuilderForm.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useUser } from "@clerk/clerk-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import QRCode from 'react-qr-code';
 import EducationForm from "../../components/EducationForm";
 import TagInputSection from "../../components/TagInputSection";
-import WorkExperienceForm from "../../components/WorkExperienceForm";
 
 const GITHUB_CLIENT_ID = "Ov23liz2TPFRchkUysG3";
 
 const FormPage = () => {
   const { user } = useUser();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [loading, setLoading] = useState(false);
+  const [vercelUrl, setVercelUrl] = useState("");
+  const [githubUrl, setGithubUrl] = useState("");
 
   const [formData, setFormData] = useState({
     personalInfo: {
@@ -96,9 +101,23 @@ const FormPage = () => {
     setFormData({ ...formData, [section]: updatedArray });
   };
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const githubUrlParam = urlParams.get("githubUrl");
+    const vercelUrlParam = urlParams.get("vercelUrl");
+
+    if (githubUrlParam && vercelUrlParam) {
+      setLoading(false);
+      setGithubUrl(decodeURIComponent(githubUrlParam));
+      setVercelUrl(decodeURIComponent(vercelUrlParam));
+    }
+  }, [location.search]);
+
   const handleSubmit = () => {
+    setLoading(true);
     const encodedState = btoa(JSON.stringify(formData));
-    window.location.href = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo&state=${encodedState}`;
+    const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo&state=${encodedState}`;
+    window.location.href = oauthUrl;
   };
 
   return (
@@ -112,7 +131,6 @@ const FormPage = () => {
         </div>
 
         <div className="card bg-base-200 shadow-md p-6 space-y-8">
-          {/* Personal Info */}
           <div>
             <h2 className="text-xl font-semibold mb-4">Personal Info</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -121,7 +139,7 @@ const FormPage = () => {
                   key={field}
                   type="text"
                   className="input input-bordered w-full"
-                  placeholder={field.replace(/([A-Z])/g, " $1").replace(/^\w/, (c) => c.toUpperCase())}
+                  placeholder={field.replace(/([A-Z])/g, " $1").replace(/^[a-z]/, (c) => c.toUpperCase())}
                   value={value}
                   onChange={(e) => handleChange("personalInfo", field, e.target.value)}
                 />
@@ -129,7 +147,6 @@ const FormPage = () => {
             </div>
           </div>
 
-          {/* Education */}
           <EducationForm
             data={formData.education}
             onChange={handleChange}
@@ -137,7 +154,6 @@ const FormPage = () => {
             onRemove={(id) => removeEntry("education", id)}
           />
 
-          {/* Experience */}
           <TagInputSection
             title="Experience"
             placeholder="e.g. Frontend Intern at XYZ (2023)"
@@ -149,7 +165,6 @@ const FormPage = () => {
             badgeStyle="badge-neutral"
           />
 
-          {/* Projects */}
           <TagInputSection
             title="Projects"
             placeholder="e.g. Portfolio Website using React"
@@ -161,7 +176,6 @@ const FormPage = () => {
             badgeStyle="badge-info"
           />
 
-          {/* Skills */}
           <TagInputSection
             title="Skills"
             placeholder="JavaScript, Python, etc."
@@ -173,7 +187,6 @@ const FormPage = () => {
             badgeStyle="badge-primary"
           />
 
-          {/* Languages */}
           <TagInputSection
             title="Languages"
             placeholder="English, Hindi, etc."
@@ -185,12 +198,33 @@ const FormPage = () => {
             badgeStyle="badge-accent"
           />
 
-          {/* Submit Button */}
           <div className="flex justify-end">
-            <button className="btn btn-primary" onClick={handleSubmit}>
-              🚀 Generate Portfolio
+            <button className="btn btn-primary" onClick={handleSubmit} disabled={loading}>
+              {loading ? "Generating..." : "🚀 Generate Portfolio"}
             </button>
           </div>
+
+          {loading && (
+            <div className="text-center">
+              <p className="text-lg font-semibold">🚀 Deploying your portfolio...</p>
+              <span className="loading loading-spinner text-primary mt-4"></span>
+            </div>
+          )}
+
+          {!loading && vercelUrl && (
+            <div className="mt-8 text-center space-y-4">
+              <h2 className="text-xl font-bold text-green-600">🎉 Portfolio Deployed!</h2>
+              <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="link link-primary">
+                📂 View GitHub Repo
+              </a>
+              <div className="flex justify-center mt-4">
+                <QRCode value={vercelUrl} size={180} />
+              </div>
+              <a href={vercelUrl} target="_blank" rel="noopener noreferrer" className="btn btn-accent mt-4">
+                🌐 View Live Portfolio
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>
