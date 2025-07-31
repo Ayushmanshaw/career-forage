@@ -346,7 +346,7 @@ const ResumePreview = () => {
   const handleSaveToServer = async () => {
     try {
       const token = await getToken();
-      const response = await fetch("http://localhost:5000/api/resumes", {
+      const response = await fetch("https://career-forage.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
