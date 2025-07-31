@@ -116,7 +116,8 @@ const FormPage = () => {
   const handleSubmit = () => {
     setLoading(true);
     const encodedState = btoa(JSON.stringify(formData));
-    const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo&state=${encodedState}`;
+    const REDIRECT_URI = "https://career-forage.onrender.com/api/github/callback";
+    const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&state=${encodedState}`;
     window.location.href = oauthUrl;
   };
 
