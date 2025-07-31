@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{fullName}}'s Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8fafc;
+      margin: 0;
+      padding: 0;
+      color: #1f2937;
+    }
+    .section {
+      max-width: 900px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+    h1, h2, h3 {
+      color: #111827;
+    }
+    .divider {
+      height: 2px;
+      width: 60px;
+      background-color: #3b82f6;
+      margin: 16px 0;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .btn {
+      background-color: #3b82f6;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #2563eb;
+    }
+    .social-links a {
+      margin-right: 12px;
+      color: #3b82f6;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <section class="section" data-aos="fade-up">
+    <h1>Hello, I'm <span style="color:#3b82f6">{{fullName}}</span></h1>
+    <p><strong>Profession:</strong> {{profession}}</p>
+    <p><strong>Email:</strong> {{email}}</p>
+    <p><strong>About Me:</strong> {{about}}</p>
+    <div class="social-links">
+      <a href="{{githubLink}}" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="{{linkedin}}" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+  <section class="section" data-aos="fade-up">
+    <h2>Education</h2>
+    <div class="divider"></div>
+    <p>{{education}}</p>
+  </section>
+
+  <section class="section" data-aos="fade-up">
+    <h2>Experience</h2>
+    <div class="divider"></div>
+    <p>{{experience}}</p>
+  </section>
+
+  <section class="section" data-aos="fade-up">
+    <h2>Skills</h2>
+    <div class="divider"></div>
+    <ul>
+      {{#each skills}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <section class="section" data-aos="fade-up">
+    <h2>Languages</h2>
+    <div class="divider"></div>
+    <ul>
+      {{#each languages}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <section class="section" data-aos="fade-up">
+    <h2>Projects</h2>
+    <div class="divider"></div>
+    <ul>
+      {{#each projects}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <section class="section" data-aos="fade-up">
+    <a href="resume.pdf" download>
+      <button class="btn">Download Resume</button>
+    </a>
+  </section>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({ offset: 0 });
+  </script>
+</body>
+</html>

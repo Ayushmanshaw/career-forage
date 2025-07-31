@@ -1,21 +1,33 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-require("dotenv").config();
+// server.js (ESM-compatible)
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import resumeRoutes from "./routes/resumeRoutes.js";
+import requireClerkAuth from "./middleware/clerkAuth.js";
+import resumeParserRoute from "./routes/getResumeParse.js";
+import authRoutes from './routes/auth.js';
 
-const resumeRoutes = require("./routes/resumeRoutes");
-const requireClerkAuth = require("./middleware/clerkAuth"); 
+
+dotenv.config();
 
 const app = express();
 
-// Middlewares
+// Middleware
 app.use(cors());
 app.use(express.json());
-console.log("🔍 typeof requireClerkAuth:", typeof requireClerkAuth)
-// Route Middleware (secured with Clerk)
-app.use("/api/resumes", requireClerkAuth, resumeRoutes);
 
-// MongoDB Connection + Server Start
+// Logging
+console.log("🔍 typeof requireClerkAuth:", typeof requireClerkAuth);
+
+// Routes
+app.use("/api/resumes", requireClerkAuth, resumeRoutes); // Clerk protected
+app.use("/api/ai", resumeParserRoute); // GPT parser route
+
+
+app.use('/api', authRoutes);
+
+// DB Connection + Start Server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("✅ MongoDB connected");

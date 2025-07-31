@@ -1,5 +1,5 @@
 // models/Resume.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const resumeSchema = new mongoose.Schema({
   userId: { type: String, required: true },
@@ -8,4 +8,5 @@ const resumeSchema = new mongoose.Schema({
   resumeUrl: { type: String }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Resume', resumeSchema); // ✅ named export
+const Resume = mongoose.model('Resume', resumeSchema);
+export default Resume;

@@ -11,6 +11,8 @@ import ResumeTemplates from './pages/resume/ResumeTemplate.jsx';
 import ResumeBuilderForm from './pages/resume/ResumeForm.jsx';
 import ResumePreview from './pages/resume/ResumePreview.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
+import FormPage from './pages/portfolio/FormPage.jsx';
+
 
 function App() {
   return (
@@ -19,7 +21,7 @@ function App() {
         {/* Main layout route */}
         <Route path="/" element={<Layout />}>
           <Route index element={<LandingPage />} />
-          <Route path="home" element={<Home />} />
+          <Route path="home" element={<LandingPage/>} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="services" element={<Services />} />
@@ -27,7 +29,7 @@ function App() {
           <Route path="resume/template" element={<ResumeTemplates />} />
           <Route path="/resume/form" element={<ResumeBuilderForm />} />
           <Route path="/resume/preview" element={<ResumePreview />} />
-
+          <Route path="/form" element={<FormPage />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>

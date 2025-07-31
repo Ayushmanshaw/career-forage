@@ -8,7 +8,7 @@ const Services = () => {
           <div className="max-w-xl">
             <h1 className="text-5xl font-bold">Our Services</h1>
             <p className="py-6 text-base-content">
-              Explore the tools and services we offer to supercharge your career journey.
+              Supercharge your career journey with our powerful, easy-to-use tools.
             </p>
           </div>
         </div>
@@ -18,10 +18,13 @@ const Services = () => {
       <section className="px-6 py-12 max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service, index) => (
           <div key={index} className="card bg-base-200 shadow-xl">
-            <div className="card-body text-center">
-              <h2 className="card-title">{service.title}</h2>
-              <p className="text-base-content">{service.description}</p>
-              <button className="btn btn-secondary mt-4">Learn More</button>
+            <div className="card-body">
+              <h2 className="card-title text-primary">{service.title}</h2>
+              <ul className="list-disc list-inside text-base-content space-y-1">
+                {service.points.map((point, idx) => (
+                  <li key={idx}>{point}</li>
+                ))}
+              </ul>
             </div>
           </div>
         ))}
@@ -33,27 +36,51 @@ const Services = () => {
 const services = [
   {
     title: "Resume Builder",
-    description: "Create polished, ATS-optimized resumes quickly and easily.",
+    points: [
+      "Build modern, professional resumes in minutes",
+      "ATS-optimized formatting and layout",
+      "Export to PDF or save to your dashboard",
+    ],
   },
   {
     title: "Cover Letter Generator",
-    description: "Generate tailored cover letters using AI in minutes.",
+    points: [
+      "Generate custom AI-powered cover letters",
+      "Tailored to the job role and company",
+      "Save and edit anytime",
+    ],
   },
   {
     title: "ATS Score Checker",
-    description: "Analyze your resume's compatibility with Applicant Tracking Systems.",
+    points: [
+      "Get your resume's ATS compatibility score",
+      "Receive suggestions for improvement",
+      "Boost your chances of passing filters",
+    ],
   },
   {
     title: "Portfolio Builder",
-    description: "Auto-generate and deploy your professional portfolio website.",
+    points: [
+      "Auto-generate portfolio from your resume",
+      "Deploy it online with one click",
+      "Customize your design and content",
+    ],
   },
   {
     title: "QR Code Generator",
-    description: "Create QR codes for quick resume & portfolio sharing.",
+    points: [
+      "Instantly generate QR codes for resume/portfolio",
+      "Perfect for sharing at events or on business cards",
+      "Track usage and engagement",
+    ],
   },
   {
     title: "Custom Templates",
-    description: "Choose from a variety of modern, elegant templates for resumes & portfolios.",
+    points: [
+      "Choose from modern, elegant templates",
+      "Both resume and portfolio styles available",
+      "Personalize fonts, colors, and layouts",
+    ],
   },
 ];
 

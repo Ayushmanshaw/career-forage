@@ -29,7 +29,7 @@ export default function LandingPage() {
                 Go to Dashboard
               </Link>
             )}
-            <Link to="/learn-more" className="btn btn-outline btn-lg">
+            <Link to="/services" className="btn btn-outline btn-lg">
               Learn More
             </Link>
           </div>
@@ -118,7 +118,15 @@ export default function LandingPage() {
                   Create and deploy a professional portfolio to GitHub and Vercel with just a few clicks.
                 </p>
                 <div className="card-actions justify-end mt-4">
-                  <span className="badge badge-secondary">Coming Soon</span>
+                 {!isSignedIn ? (
+                    <button onClick={openSignIn} className="link link-primary">
+                      Try it now
+                    </button>
+                  ) : (
+                    <Link to="/form" className="link link-primary">
+                      Try it now
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

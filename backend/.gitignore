@@ -31,14 +31,7 @@ Thumbs.db
 # Editor folders
 .vscode/
 .idea/
+node_modules/
+.env
+uploads/
 
-# Temporary files
-*.swp
-*.bak
-*.tmp
-
-# Coverage (if using test coverage tools like Istanbul)
-coverage/
-
-# Debug
-debug.log

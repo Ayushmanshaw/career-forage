@@ -72,7 +72,7 @@ const features = [
   {
     title: "Portfolio Builder",
     description: "Auto-generate and deploy your portfolio.",
-    link: "/portfolio",
+    link: "/form",
   },
 ];
 

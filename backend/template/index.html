@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{fullName}}'s Portfolio</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      color: #1f2937;
+    }
+    header, section {
+      background: #ffffff;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 900px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #111827;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    .social a {
+      margin-right: 15px;
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .education-item, .experience-item {
+      margin-bottom: 15px;
+    }
+    .section-title {
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>{{fullName}}</h1>
+    <p><strong>Email:</strong> {{email}}</p>
+    {{#if profession}}<p><strong>Profession:</strong> {{profession}}</p>{{/if}}
+    <div class="social">
+      {{#if linkedin}}<a href="{{linkedin}}" target="_blank">LinkedIn</a>{{/if}}
+      {{#if githubLink}}<a href="{{githubLink}}" target="_blank">GitHub</a>{{/if}}
+    </div>
+  </header>
+
+  {{#if about}}
+  <section>
+    <h2 class="section-title">About Me</h2>
+    <p>{{about}}</p>
+  </section>
+  {{/if}}
+
+  {{#if education.length}}
+  <section>
+    <h2 class="section-title">Education</h2>
+    {{#each education}}
+    <div class="education-item">
+      <p><strong>{{degree}}</strong> — {{institution}}</p>
+      <p>{{fieldOfStudy}}, {{startDate}} - {{endDate}}</p>
+      {{#if marks}}<p><em>Marks/CGPA:</em> {{marks}}</p>{{/if}}
+    </div>
+    {{/each}}
+  </section>
+  {{/if}}
+
+  {{#if experience.length}}
+  <section>
+    <h2 class="section-title">Experience</h2>
+    <ul>
+      {{#each experience}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+  {{#if projects.length}}
+  <section>
+    <h2 class="section-title">Projects</h2>
+    <ul>
+      {{#each projects}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+  {{#if skills.length}}
+  <section>
+    <h2 class="section-title">Skills</h2>
+    <ul>
+      {{#each skills}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+  {{#if languages.length}}
+  <section>
+    <h2 class="section-title">Languages</h2>
+    <ul>
+      {{#each languages}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  </section>
+  {{/if}}
+
+</body>
+</html>

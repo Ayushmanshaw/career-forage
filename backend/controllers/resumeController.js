@@ -1,18 +1,18 @@
 // controllers/resumeController.js
 
-const Resume = require('../models/Resume');
+import Resume from '../models/Resume.js';
 
 // POST /api/resumes
-const createResume = async (req, res) => {
+export const createResume = async (req, res) => {
   try {
-    console.log('Incoming data:', req.body); // 🪵 Log request body for debugging
+    console.log('Incoming data:', req.body);
 
     const { userId, resumeData, template } = req.body;
 
     const newResume = new Resume({
       userId,
       data: resumeData,
-      template: template, // Store the selected template ID
+      template: template,
     });
 
     await newResume.save();
@@ -24,9 +24,10 @@ const createResume = async (req, res) => {
   }
 };
 
-const getResumes = async (req, res) => {
+// GET /api/resumes?userId=...
+export const getResumes = async (req, res) => {
   try {
-    const userId = req.query.userId; // or from Clerk token
+    const userId = req.query.userId;
     const resumes = await Resume.find({ userId }).sort({ createdAt: -1 });
     res.status(200).json(resumes);
   } catch (err) {
@@ -35,4 +36,19 @@ const getResumes = async (req, res) => {
   }
 };
 
-module.exports = { createResume, getResumes };
+// DELETE /api/resumes/:id
+export const deleteResume = async (req, res) => {
+  try {
+    const resumeId = req.params.id;
+    const deleted = await Resume.findByIdAndDelete(resumeId);
+
+    if (!deleted) {
+      return res.status(404).json({ message: 'Resume not found' });
+    }
+
+    res.status(200).json({ message: 'Resume deleted successfully' });
+  } catch (err) {
+    console.error('Delete error:', err);
+    res.status(500).json({ error: 'Server error while deleting resume' });
+  }
+};

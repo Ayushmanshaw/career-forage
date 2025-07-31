@@ -1,18 +1,25 @@
-// routes/resumeRoutes.js
-// const express = require("express");
-// const router = express.Router();
-// const { createResume, getResumes } = require("../controllers/resumeController");
+import express from "express";
+import multer from "multer";
+import {
+  createResume,
+  getResumes,
+  deleteResume, // 🆕 import controller
+} from "../controllers/resumeController.js";
 
-// router.post("/", createResume);
-// router.get("/", getResumes);
-
-// module.exports = router;
-
-const express = require("express");
 const router = express.Router();
-const { createResume, getResumes } = require("../controllers/resumeController");
 
-router.post("/", createResume);
-router.get("/", getResumes);
+// Setup multer
+const storage = multer.diskStorage({
+  destination: "./uploads",
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage });
 
-module.exports = router;
+// Routes
+router.post("/", createResume); // Save JSON resume data
+router.get("/", getResumes);    // Get resumes for user
+router.delete("/:id", deleteResume); // 🆕 Delete resume by ID
+
+export default router;
