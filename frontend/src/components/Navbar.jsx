@@ -90,7 +90,7 @@ export default function Navbar() {
           ) : (
             <button 
               onClick={openSignIn} 
-              className="bg-primary text-white px-5 py-2 rounded-full hover:bg-primary-focus transition-colors"
+              className="bg-primary text-white px-4 py-1.5 text-sm rounded-full hover:bg-primary-focus transition-colors sm:px-5 sm:py-2 sm:text-base"
             >
               Create Account
             </button>
