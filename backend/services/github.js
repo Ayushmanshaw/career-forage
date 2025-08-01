@@ -1,4 +1,3 @@
-// services/github.js
 import axios from 'axios';
 import simpleGit from 'simple-git';
 
@@ -28,6 +27,12 @@ export const createRepo = async (token, repoName, username, localPath) => {
   // Step 2: Setup and push via simple-git
   const git = simpleGit(localPath);
   await git.init();
+
+  // ✅ Set Git identity locally
+  await git.addConfig('user.name', 'Ayushmanshaw');
+  await git.addConfig('user.email', 'ayushmanshaw6471@gmail.com');
+  // Alternative (anonymous): await git.addConfig('user.email', `${username}@users.noreply.github.com`);
+
   await git.addRemote('origin', `https://oauth2:${token}@github.com/${username}/${repoName}.git`);
   await git.add('.');
   await git.commit('Initial commit');
